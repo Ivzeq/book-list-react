@@ -1,3 +1,12 @@
+body{
+  background-color: #151520;
+  color:#dddddd;
+}
+
 .App {
   text-align: center;
+}
+
+ul{
+  margin: 16px;
 }
