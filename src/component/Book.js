@@ -2,7 +2,7 @@ import React from "react";
 
 export default function Book ({book}){
     return(
-        <div>
+        <div className="bookContainer">
             <ul>
                 <li>Title: {book.title}</li>
                 <li>Author: {book.author}</li>

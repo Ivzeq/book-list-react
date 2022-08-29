@@ -3,7 +3,7 @@ import Book from "./Book";
 
 export default function BookShowcase({bookList}){
     return(
-        <ul>
+        <ul className="bookDisplay">
             {bookList.map(
                 mappedBook =>{
                     return (

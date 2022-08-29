@@ -1,12 +1,28 @@
+html, body{
+  margin: 0px;
+  height: 100%;
+}
+
 body{
   background-color: #151520;
   color:#dddddd;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .App {
   text-align: center;
 }
 
-ul{
-  margin: 16px;
+.bookContainer ul{
+  border: 1px #dddddd solid;
+  border-radius: 16px;
+  padding: 8px 32px;
+  margin: 32px;
+}
+
+li{
+  list-style: none;
 }
