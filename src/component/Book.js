@@ -12,6 +12,7 @@ export default function Book ({book}){
                 <input onChange={() => {}} type="checkbox" checked={true}></input>:
                 <input onChange={() => {}} type="checkbox" checked={false}></input>}</li>
             </ul>
+            <img src={book.thumbnail} alt="Book cover"></img>
         </div>
     )
 }

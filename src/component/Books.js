@@ -1,6 +1,7 @@
 import {React, useState, useEffect} from "react";
 import BookShowcase from "./BookShowcase";
 import { BookService } from "../service/BookService";
+import { ThumbnailService } from "../service/ThumbnailService";
 
 
 export default function Books(){
@@ -11,6 +12,7 @@ export default function Books(){
     const [bookAuthor, setBookAuthor] = useState('');
     const [bookPages, setBookPages] = useState('');
     const [bookRead, setBookRead] = useState('');
+    const [bookThumbnail, setBookThumbnail] = useState('http://books.google.com/books/content?id=0uR3DwAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api');
 
     //Declare useState for state management
     const [fetchStatus, setFetchStatus] = useState('pending');
@@ -32,15 +34,33 @@ export default function Books(){
     },[])
 
 
-    //Define bookHandler function
+    //Define bookHandler function which takes the input and adds a new book
     function bookHandler(e){
+        //State and event management
         e.preventDefault()
         setFetchStatus('inProgress')
+
+        //Set thumbnail to the correct one
+
+        ThumbnailService.getThumbnail({
+            "read": bookRead,
+            "title": bookTitle,
+            "author": bookAuthor,
+            "pages": bookPages,
+        })
+            .then((res)=>{
+                console.log(res)
+                setBookThumbnail(res)
+            })
+        
+
+        //Add final book through addNewBookMethod
         BookService.addNewBook({
             "read": bookRead,
             "title": bookTitle,
             "author": bookAuthor,
-            "pages": bookPages
+            "pages": bookPages,
+            "thumbnail" : bookThumbnail
         },bookList)
             .then((res)=>{
                 setBookList(res)
@@ -61,7 +81,7 @@ export default function Books(){
                 <div>
                     <input type="text" placeholder="Ingresar titulo" onChange={(e) => setBookTitle(e.target.value)}></input>
                     <input type="text" placeholder="Ingresar autor" onChange={(e) => setBookAuthor(e.target.value)}></input>
-                    <input type="number" placeholder="ex. 500" onChange={(e) => setBookPages(e.target.value)}></input>
+                    <input type="number" placeholder="Ingresa paginas ex. 500" onChange={(e) => setBookPages(e.target.value)}></input>
                     <input type="checkbox" onChange={(e) => setBookRead(e.target.checked)}></input>
                 </div>
                 

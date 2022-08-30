@@ -1,4 +1,5 @@
 import { testBooks } from "../data/testBookList";
+import { ThumbnailService } from "./ThumbnailService";
 
 export const BookService = {
     
@@ -13,13 +14,15 @@ export const BookService = {
         const title = body.title;
         const author = body.author;
         const pages = body.pages;
+        const thumbnail = body.thumbnail;
 
         const newBookList = [...lastBookList, {
             read,
             title,
             author,
             pages,
-            id: lastBookList.length +1
+            id: lastBookList.length +1,
+            thumbnail
         }]
 
         return Promise.resolve(newBookList)
