@@ -2,7 +2,7 @@ import {React, useState, useEffect} from "react";
 import BookShowcase from "./BookShowcase";
 import { BookService } from "../service/BookService";
 import { ThumbnailService } from "../service/ThumbnailService";
-
+import BookInputForm from "./BookInputForm";
 
 export default function Books(){
 
@@ -31,31 +31,33 @@ export default function Books(){
             .finally(()=>{
                 setTimeout(()=>{setFetchStatus('completed')}, 1000 )
             })
+            console.log('First Data Input')
     },[])
 
 
     //Define bookHandler function which takes the input and adds a new book
-    function bookHandler(e){
+    async function bookHandler(e){
         //State and event management
         e.preventDefault()
         setFetchStatus('inProgress')
-
+        console.log(1 + " " + bookThumbnail)
         //Set thumbnail to the correct one
 
-        ThumbnailService.getThumbnail({
+        await ThumbnailService.getThumbnail({
             "read": bookRead,
             "title": bookTitle,
             "author": bookAuthor,
             "pages": bookPages,
         })
-            .then((res)=>{
-                console.log(res)
+            .then( (res)=>{
+                console.log(3 + " " + res)
                 setBookThumbnail(res)
+                console.log(3.5 + " " + res)
             })
         
 
         //Add final book through addNewBookMethod
-        BookService.addNewBook({
+        await BookService.addNewBook({
             "read": bookRead,
             "title": bookTitle,
             "author": bookAuthor,
@@ -63,7 +65,9 @@ export default function Books(){
             "thumbnail" : bookThumbnail
         },bookList)
             .then((res)=>{
+                console.log(4 + " " + bookThumbnail)
                 setBookList(res)
+                console.log(4.5 + " " + bookThumbnail)
             })
             .catch((err) =>{
                 setFetchError(err.message)
@@ -71,22 +75,15 @@ export default function Books(){
             .finally(()=>{
                 setTimeout(()=>{setFetchStatus('completed')}, 500 )
             })
+        console.log(5 + " " + bookThumbnail)
     }
 
 
     //Return all book related items
     return(
         <div >
-            <form>
-                <div>
-                    <input type="text" placeholder="Ingresar titulo" onChange={(e) => setBookTitle(e.target.value)}></input>
-                    <input type="text" placeholder="Ingresar autor" onChange={(e) => setBookAuthor(e.target.value)}></input>
-                    <input type="number" placeholder="Ingresa paginas ex. 500" onChange={(e) => setBookPages(e.target.value)}></input>
-                    <input type="checkbox" onChange={(e) => setBookRead(e.target.checked)}></input>
-                </div>
-                
-                <button onClick={bookHandler}>Add Book</button>
-            </form>
+            <BookInputForm setBookTitle={setBookTitle} setBookAuthor={setBookAuthor} setBookPages={setBookPages} setBookRead={setBookRead} bookHandler={bookHandler}></BookInputForm>
+            
             {fetchStatus==='inProgress' && <p>In progress</p>}
             {fetchStatus === 'completed' && fetchError && <p>{fetchError}</p>}
             {fetchStatus === 'completed' && !fetchError && <BookShowcase bookList = {bookList}></BookShowcase>}
