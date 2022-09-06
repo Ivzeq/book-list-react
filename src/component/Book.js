@@ -1,18 +1,19 @@
+import { Card, Checkbox, Container, List, Typography } from "@mui/material";
 import React from "react";
 
 export default function Book ({book}){
     return(
-        <div className="bookContainer">
-            <ul>
-                <li>Title: {book.title}</li>
-                <li>Author: {book.author}</li>
-                <li>Pages: {book.pages}</li>
+        <Card className="bookContainer">
+            <List>
+                <Typography>Title: {book.title}</Typography>
+                <Typography>Author: {book.author}</Typography>
+                <Typography>Pages: {book.pages}</Typography>
                 
-                <li>Read{book.read ?
-                <input onChange={() => {}} type="checkbox" checked={true}></input>:
-                <input onChange={() => {}} type="checkbox" checked={false}></input>}</li>
-            </ul>
+                <Typography>Read{book.read ?
+                <Checkbox color="success" size="small" onChange={() => {}} type="checkbox" checked={true}></Checkbox>:
+                <Checkbox color="success" onChange={() => {}} type="checkbox" checked={false}></Checkbox>}</Typography>
+            </List>
             <img src={book.thumbnail} alt="Book cover"></img>
-        </div>
+        </Card>
     )
 }

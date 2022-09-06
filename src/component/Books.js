@@ -81,7 +81,7 @@ export default function Books(){
 
     //Return all book related items
     return(
-        <div >
+        <div>
             <BookInputForm setBookTitle={setBookTitle} setBookAuthor={setBookAuthor} setBookPages={setBookPages} setBookRead={setBookRead} bookHandler={bookHandler}></BookInputForm>
             
             {fetchStatus==='inProgress' && <p>In progress</p>}

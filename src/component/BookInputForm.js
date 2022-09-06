@@ -1,16 +1,17 @@
 import React from "react";
+import { Button, Checkbox, Container, TextField } from "@mui/material";
 
 export default function BookInputForm({bookHandler, setBookTitle, setBookAuthor, setBookPages, setBookRead}){
     return(
         <form>
-                <div>
-                    <input type="text" placeholder="Ingresar titulo" onChange={(e) => setBookTitle(e.target.value)}></input>
-                    <input type="text" placeholder="Ingresar autor" onChange={(e) => setBookAuthor(e.target.value)}></input>
-                    <input type="number" placeholder="Ingresa paginas ex. 500" onChange={(e) => setBookPages(e.target.value)}></input>
-                    <input type="checkbox" onChange={(e) => setBookRead(e.target.checked)}></input>
-                </div>
+                <Container>
+                    <TextField variant="filled" size="small" type="text" label="Ingresar titulo" onChange={(e) => setBookTitle(e.target.value)}></TextField>
+                    <TextField variant="filled" size="small" type="text" label="Ingresar autor" onChange={(e) => setBookAuthor(e.target.value)}></TextField>
+                    <TextField variant="filled" size="small" type="number" label="Ingresa paginas" onChange={(e) => setBookPages(e.target.value)}></TextField>
+                    <Checkbox onChange={(e) => setBookRead(e.target.checked)} defaultChecked></Checkbox>
+                </Container>
                 
-                <button onClick={bookHandler}>Add Book</button>
+                <Button variant="contained" size="small" color="error" onClick={bookHandler}>Add Book</Button>
         </form>
     )
 }
