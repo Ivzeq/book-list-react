@@ -16,6 +16,7 @@ export const BookService = {
         const pages = body.pages;
         const thumbnail = body.thumbnail;
 
+        console.log("3.9 " + thumbnail)
         const newBookList = [...lastBookList, {
             read,
             title,

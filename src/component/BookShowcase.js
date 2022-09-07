@@ -1,9 +1,10 @@
+import { Box } from "@mui/material";
 import React from "react";
 import Book from "./Book";
 
 export default function BookShowcase({bookList}){
     return(
-        <ul className="bookDisplay">
+        <Box className="bookDisplay">
             {bookList.map(
                 mappedBook =>{
                     return (
@@ -11,6 +12,6 @@ export default function BookShowcase({bookList}){
                     )
                 }
             )}
-        </ul>
+        </Box>
     )
 }

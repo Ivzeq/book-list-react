@@ -41,6 +41,7 @@ export default function Books(){
         e.preventDefault()
         setFetchStatus('inProgress')
         console.log(1 + " " + bookThumbnail)
+        let tempBookThumbnail;
         //Set thumbnail to the correct one
 
         await ThumbnailService.getThumbnail({
@@ -49,10 +50,11 @@ export default function Books(){
             "author": bookAuthor,
             "pages": bookPages,
         })
-            .then( (res)=>{
+            .then( async (res)=>{
                 console.log(3 + " " + res)
-                setBookThumbnail(res)
-                console.log(3.5 + " " + res)
+                await setBookThumbnail(res)
+                tempBookThumbnail = res;
+                console.log(3.5 + " " + bookThumbnail)
             })
         
 
@@ -62,7 +64,7 @@ export default function Books(){
             "title": bookTitle,
             "author": bookAuthor,
             "pages": bookPages,
-            "thumbnail" : bookThumbnail
+            "thumbnail" : tempBookThumbnail
         },bookList)
             .then((res)=>{
                 console.log(4 + " " + bookThumbnail)

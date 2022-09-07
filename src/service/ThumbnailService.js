@@ -17,6 +17,6 @@ export const ThumbnailService ={
                 //console.log(thumbnailURL)
             })
             console.log("2 " + thumbnailURL)
-        return Promise.resolve(thumbnailURL);
+        return thumbnailURL;
     }
 }
